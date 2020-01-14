@@ -46,3 +46,6 @@ Are all monads monoids? or semigroups?
 * Write a function which represents one of the laws
 
 * Then call quickCheck which will run many different tests to verify that your implementation is correct
+
+#### Sources:
+* https://mmhaskell.com/monads/laws

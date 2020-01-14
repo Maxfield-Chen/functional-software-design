@@ -20,7 +20,7 @@
 
     Learn why step 4 is better sometimes and when it makes sense to use either technique
 
-[-] Learn do notation and do some stuff in IO to make actual programs
+[x] Learn do notation and do some stuff in IO to make actual programs
 
     [x] Learn how to desugar do notation into a sequence of calls to (>>=)
 
@@ -78,3 +78,7 @@ You're now an intermediate Haskeller.
 There is no set path to guru, but there should now be nothing in between you and learning to write an arbitrarily complex and idiomatic Haskell program.
 
 There is a lot of stuff to learn past this point - a whole world. But it gets extremely non-linear past this point, with a lot of topics of varying complexity and utility, and it starts getting a lot less universally applicable.
+
+## Additional Resources:
+* http://lambdaconf.us/downloads/documents/lambdaconf_slfp.pdf
+* http://softwaresimply.blogspot.com/2016/08/how-to-get-haskell-job.html
