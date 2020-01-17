@@ -34,16 +34,16 @@
 
 [x] Understand, again, that all a monad is is something that implements (>>=) and return, and follows the laws.
 
-    [-] Learn the laws again, and try to understand why breaking the laws would be really bad.
+    [x] Learn the laws again, and try to understand why breaking the laws would be really bad.
 
 [x] Use a bunch of stuff that has a monad instance in IO and get irritated about it. 1.You're not actually learning any skills in this step but it's still really valuable.
   Ugh, either in IO monad is very annoying.
 
-Learn about typeclasses
+[x] Learn about typeclasses
 
-The syntax for declaring classes and instances
+[x] The syntax for declaring classes and instances
 
-How to use 'minimal'
+[x] How to use 'minimal'
 
 Study the implementations for Functor, applicative, and monad instances in base for the Either and Maybe types
 
@@ -69,7 +69,7 @@ Learn to use lens to access and manipulate record types inside a collection
 
 Learn when and why to use bytestring, string, and text
 
-Write a parser using Parsec, Megaparsec, or Attoparsec
+[x] Write a parser using Parsec, Megaparsec, or Attoparsec
 
 Write a simple web server, CLI, or GUI app using the skills above.
 
