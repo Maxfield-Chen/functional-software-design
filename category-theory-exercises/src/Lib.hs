@@ -5,7 +5,7 @@ where
 
 import           Data.Char                      ( toUpper )
 import           Control.Monad.State
-import Debug.Trace
+import           Debug.Trace
 
 
 --type Writer a = (a, String)
@@ -205,11 +205,29 @@ popS = state (\(x : xs) -> (x, xs))
 
 -- Note here that the >> and >>= operators are dealing with threading the state. 
 stateStackStuff :: State Stack ()
-stateStackStuff = pushS 5 >> pushS 6 >> popS >>= \a -> pushS a 
+stateStackStuff = pushS 5 >> pushS 6 >> popS >>= \a -> pushS a
 
+-- Changing the order of a and b here will break the functor definition below.
+-- I'm missing something about the type param a in the instance declaration
+data MaxEither a b = Bad a | Good b
+
+instance Functor (MaxEither a) where
+  fmap _ (Bad  x) = Bad x
+  fmap f (Good y) = Good (f y)
 
 -- Monad writing practice
 -- Here's a data type with a monad instance that combines
 -- Either and State
-data EitherState s a b = Bad b | Good (s -> (a, s))
+newtype EState s a b = EState {runEState :: s -> (s, Either a b)}
 
+-- Note that we cannot parameterize on b, since we don't know
+-- what type f returns. Fmap says it should be allowed to return some other
+-- either type that is still an EState.
+instance Functor (EState s a) where
+  fmap f m = EState
+    (\st ->
+      let (s, e) = runEState m st
+      in  case e of
+            Left  x -> (s, Left x)
+            Right y -> (s, Right (f y))
+    )

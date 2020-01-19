@@ -87,3 +87,4 @@ There is a lot of stuff to learn past this point - a whole world. But it gets ex
 * http://lambdaconf.us/downloads/documents/lambdaconf_slfp.pdf
 * http://softwaresimply.blogspot.com/2016/08/how-to-get-haskell-job.html
 * https://typeclasses.com/phrasebook
+* https://lexi-lambda.github.io/blog/2018/02/10/an-opinionated-guide-to-haskell-in-2018/
