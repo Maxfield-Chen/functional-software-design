@@ -209,6 +209,8 @@ stateStackStuff = pushS 5 >> pushS 6 >> popS >>= \a -> pushS a
 
 -- Changing the order of a and b here will break the functor definition below.
 -- I'm missing something about the type param a in the instance declaration
+-- Has to do with the type signature for fmap, still not clear what exactly. 
+-- TODO: Ask about this at next beerly functional meetup
 data MaxEither a b = Bad a | Good b
 
 instance Functor (MaxEither a) where
@@ -224,10 +226,25 @@ newtype EState s a b = EState {runEState :: s -> (s, Either a b)}
 -- what type f returns. Fmap says it should be allowed to return some other
 -- either type that is still an EState.
 instance Functor (EState s a) where
-  fmap f m = EState
-    (\st ->
-      let (s, e) = runEState m st
-      in  case e of
-            Left  x -> (s, Left x)
-            Right y -> (s, Right (f y))
+  fmap f m = EState (\st -> let (s, e) = runEState m st in (s, fmap f e))
+
+instance Applicative (EState s a) where
+  pure a = EState (\s -> (s, Right a))
+  sa <*> sb = EState
+    (\si ->
+      let (s1, f) = runEState sa si
+          (s2, a) = runEState sb s1
+          r       = f <*> a
+      in  (s2, r)
     )
+
+instance Monad (EState s a) where
+  sa >>= f = EState
+    (\si ->
+      let (s1, a) = runEState sa si
+          s2      = case a of
+            Left  x -> EState (\s -> (s, Left x))
+            Right y -> f y
+      in  runEState s2 s1
+    )
+
