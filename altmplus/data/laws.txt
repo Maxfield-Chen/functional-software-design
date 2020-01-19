@@ -1,0 +1,5 @@
+-- empty is a neutral element
+empty <|> u  =  u
+u <|> empty  =  u
+-- (<|>) is associative
+u <|> (v <|> w)  =  (u <|> v) <|> w

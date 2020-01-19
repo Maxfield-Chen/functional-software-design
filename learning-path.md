@@ -45,9 +45,13 @@
 
 [x] How to use 'minimal'
 
-Study the implementations for Functor, applicative, and monad instances in base for the Either and Maybe types
+[x] Study the implementations for Functor, applicative, and monad instances in base for the Either and Maybe types
 
-Write your own monad instance for a type that combines the effects of State and Either
+[x] Study implementations for Alternative and MonadPlus instances for List and Maybe
+  [] Write some code using <|>, empty, some, many, mzero, mplus
+  [] Study Alternative / MonadPlus Laws
+
+[-] Write your own monad instance for a type that combines the effects of State and Either
 
 Learn about newtypes
 
@@ -82,3 +86,4 @@ There is a lot of stuff to learn past this point - a whole world. But it gets ex
 ## Additional Resources:
 * http://lambdaconf.us/downloads/documents/lambdaconf_slfp.pdf
 * http://softwaresimply.blogspot.com/2016/08/how-to-get-haskell-job.html
+* https://typeclasses.com/phrasebook
