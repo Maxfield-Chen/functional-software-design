@@ -1,3 +1,5 @@
+{-# LANGUAGE LambdaCase #-}
+
 module Lib
   ( module Lib
   )
@@ -248,3 +250,19 @@ instance Monad (EState s a) where
       in  runEState s2 s1
     )
 
+popES :: EState Stack String Int
+popES = EState
+  (\case
+    []     -> ([], Left "Cannot Pop: Empty Stack")
+    x : xs -> (xs, Right x)
+  )
+
+pushES :: Int -> EState Stack String Int
+pushES i = EState
+  (\s -> if length s >= 5
+    then (s, Left "Cannot Push: Maximum Length")
+    else (i : s, Right i)
+  )
+
+esStackStuff :: EState Stack String Int
+esStackStuff = pushES 5 >> popES >> popES >>= pushES
