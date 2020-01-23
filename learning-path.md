@@ -51,21 +51,23 @@
   [] Write some code using <|>, empty, some, many, mzero, mplus
   [] Study Alternative / MonadPlus Laws
 
-[-] Write your own monad instance for a type that combines the effects of State and Either
+[x] Write your own monad instance for a type that combines the effects of State and Either
 
-Learn about newtypes
+[x] Learn about newtypes
 
 Learn about the 'safe constructor' paradigm
 
-Understand what a 'partial function' is
+[x] Understand what a 'partial function' is
 
-Learn about module imports/exports
+[x] Learn about module imports/exports
 
-Learn either stack or cabal
+[x] Learn either stack or cabal
 
-Make a project, install some dependencies
+Learn about hpack
 
-Install some global haskell tools or packages on your system
+[x] Make a project, install some dependencies
+
+[x] Install some global haskell tools or packages on your system
 
 Learn how to use monad transformers so that you never have to roll your own ever again
 
