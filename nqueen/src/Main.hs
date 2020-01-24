@@ -92,6 +92,7 @@ maybeFromList xs = case xs of
   _       -> Nothing
 
 -- Given a board, return all possible worlds
+-- Limit to one queen per row
 -- TODO: Refactor using filter with variant?
 placeQueen :: ChessBoard -> [ChessBoard]
 placeQueen c =
