@@ -1,14 +1,15 @@
 module Main where
 
 import           Data.List
-import           Debug.Trace
+
+emptyBoard = map (pure False) boardIndexes
+allPositions = [ Pair x y | x <- rowIndexes, y <- rowIndexes ]
+rowSize = 8
+boardSize = rowSize * rowSize
+rowIndexes = [0 .. (rowSize - 1)]
+boardIndexes = [0 .. (boardSize - 1)]
 
 type ChessBoard = [Bool]
-emptyBoard = map (pure False) [0 .. (boardSize - 1)]
-allPositions =
-  [ Pair x y | x <- [0 .. (rowSize - 1)], y <- [0 .. (rowSize - 1)] ]
-boardSize = rowSize * rowSize
-rowSize = 8
 
 data Pair a = Pair a a deriving (Show,Eq)
 
@@ -62,14 +63,8 @@ isRowFree c (Pair _ y) =
       row = [rs .. re]
   in  not $ any (isOccupied c . idxToPos) row
 
-isFree :: ChessBoard -> Position -> Bool
-isFree c p = not $ isOccupied c p
-
-isDeath :: ChessBoard -> Position -> Bool
-isDeath c p = any (isOccupied c) (killzone p)
-
 isSafe :: ChessBoard -> Position -> Bool
-isSafe c p = not $ isDeath c p
+isSafe c p = not $ any (isOccupied c) (killzone p)
 
 markOccupied :: ChessBoard -> Position -> ChessBoard
 markOccupied c p
@@ -98,11 +93,13 @@ placeQueen :: ChessBoard -> [ChessBoard]
 placeQueen c =
   let spaces = map
         ((&&) <$> (isRowFree c . idxToPos) <*> (isSafe c . idxToPos))
-        [0 .. (boardSize - 1)]
+        boardIndexes
   in  foldr
-        (\(idx, q) r -> if q then markOccupied c (idxToPos idx) : r else r)
+        (\(idx, valid) r ->
+          if valid then markOccupied c (idxToPos idx) : r else r
+        )
         []
-        (zip [0 .. (boardSize - 1)] spaces)
+        (zip boardIndexes spaces)
 
 placeNQueens :: Int -> [ChessBoard]
 placeNQueens n =
@@ -114,7 +111,7 @@ printSpace (idx, b) =
   in  if b then putStr (nl ++ "Q ") else putStr (nl ++ ". ")
 
 printBoard :: ChessBoard -> IO [()]
-printBoard c = mapM printSpace (zip [0 .. boardSize - 1] c)
+printBoard c = mapM printSpace (zip boardIndexes c)
 
 main :: IO ()
 main = do
