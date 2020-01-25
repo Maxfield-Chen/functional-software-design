@@ -86,33 +86,31 @@ maybeFromList xs = case xs of
   (x : _) -> Just (x, xs)
   _       -> Nothing
 
--- Given a board, return all possible worlds
--- Limit to one queen per row
--- TODO: Refactor using filter with variant?
-placeQueen :: ChessBoard -> [ChessBoard]
-placeQueen c =
-  let spaces = map
-        ((&&) <$> (isRowFree c . idxToPos) <*> (isSafe c . idxToPos))
-        boardIndexes
-  in  foldr
-        (\(idx, valid) r ->
-          if valid then markOccupied c (idxToPos idx) : r else r
-        )
-        []
-        (zip boardIndexes spaces)
 
-placeNQueens :: Int -> [ChessBoard]
-placeNQueens n =
-  take n $ unfoldr (maybeFromList . concatMap placeQueen) [emptyBoard]
+-- Given a board, return all possible worlds
+placeQueen :: Int -> Int -> ChessBoard -> ChessBoard
+placeQueen n numPlaced c =
+  let spaces = map (isSafe c . idxToPos) boardIndexes
+      placeSpace c ((idx, valid) : xs) = if valid
+        then placeQueen n (numPlaced + 1) (markOccupied c (idxToPos idx))
+        else placeSpace c xs
+      placeSpace c [] = []
+  in  if numPlaced == n then c else placeSpace c (zip boardIndexes spaces)
+
+placeNQueens :: Int -> ChessBoard
+placeNQueens n = placeQueen n 0 emptyBoard
 
 printSpace :: (Int, Bool) -> IO ()
 printSpace (idx, b) =
   let nl = if idx `mod` rowSize == 0 then "\n" else ""
   in  if b then putStr (nl ++ "Q ") else putStr (nl ++ ". ")
 
-printBoard :: ChessBoard -> IO [()]
-printBoard c = mapM printSpace (zip boardIndexes c)
+printBoard :: ChessBoard -> IO ()
+printBoard c = mapM_ printSpace (zip boardIndexes c) >> putStrLn ""
 
 main :: IO ()
 main = do
-  putStrLn "hello world"
+  putStrLn "How many Queens? "
+  ni <- getLine
+  let n = read ni :: Int
+  printBoard $ placeNQueens n

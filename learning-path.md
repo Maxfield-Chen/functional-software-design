@@ -69,11 +69,11 @@ Learn about hpack
 
 [x] Install some global haskell tools or packages on your system
 
-Learn how to use monad transformers so that you never have to roll your own ever again
+[-] Learn how to use monad transformers so that you never have to roll your own ever again
 
-Learn to use lens to access and manipulate record types inside a collection
+[-] Learn to use lens to access and manipulate record types inside a collection
 
-Learn when and why to use bytestring, string, and text
+[x] Learn when and why to use bytestring, string, and text
 
 [x] Write a parser using Parsec, Megaparsec, or Attoparsec
 
