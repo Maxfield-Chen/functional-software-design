@@ -71,13 +71,13 @@ Learn about hpack
 
 [-] Learn how to use monad transformers so that you never have to roll your own ever again
 
-[-] Learn to use lens to access and manipulate record types inside a collection
+[x] Learn to use lens to access and manipulate record types inside a collection
 
 [x] Learn when and why to use bytestring, string, and text
 
 [x] Write a parser using Parsec, Megaparsec, or Attoparsec
 
-Write a simple web server, CLI, or GUI app using the skills above.
+[-] Write a simple web server, CLI, or GUI app using the skills above.
 
 You're now an intermediate Haskeller.
 
