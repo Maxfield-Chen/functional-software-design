@@ -78,12 +78,14 @@ Learn about hpack
 [x] Write a parser using Parsec, Megaparsec, or Attoparsec
 
 [-] Write a simple web server, CLI, or GUI app using the skills above.
+  * Liberty go server
 
-You're now an intermediate Haskeller.
+[-] Learn a front-end framework
+  * https://github.com/dmjio/miso
 
-There is no set path to guru, but there should now be nothing in between you and learning to write an arbitrarily complex and idiomatic Haskell program.
+[] Learn about nix
+  * https://github.com/Gabriel439/haskell-nix
 
-There is a lot of stuff to learn past this point - a whole world. But it gets extremely non-linear past this point, with a lot of topics of varying complexity and utility, and it starts getting a lot less universally applicable.
 
 ## Additional Resources:
 * http://lambdaconf.us/downloads/documents/lambdaconf_slfp.pdf
