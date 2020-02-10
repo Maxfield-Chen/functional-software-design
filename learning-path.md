@@ -83,8 +83,9 @@ Learn about hpack
 [-] Learn a front-end framework
   * https://github.com/dmjio/miso
 
-[] Learn about nix
+[] Learn about nix + cachix
   * https://github.com/Gabriel439/haskell-nix
+  * https://cachix.org/
 
 
 ## Additional Resources:
